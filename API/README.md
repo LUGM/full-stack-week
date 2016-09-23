@@ -5,7 +5,7 @@
 - Create a `Procfile`, similar to one in this repo.
     - The `Procfile` structure is as follows
     `web: gunicorn API:app` where `API` is the python file and `app` is the name of Flask object
-- Run `pip install -r requirents.txt`
+- Run `pip install -r requirements.txt` (`sudo` for Linux and Mac users)
 - Push your code to your github repo
 - Attach your github repo to your heroku app under the 'Deploy' section
 - See your code get deployed!
