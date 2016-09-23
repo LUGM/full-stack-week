@@ -1,4 +1,5 @@
-from flask import Flask
+from flask import Flask, jsonify
+from flask import make_response
 from flask import render_template
 from flask import request
 
@@ -37,6 +38,32 @@ def statp():
 @app.route('/dynamic/<string:value>', methods=['GET'])
 def dyanp(value):
     return render_template('temp.html', temp=value)
+
+
+@app.route('/api/get', methods=['GET'])
+def get():
+    _id = request.args['id']
+    name = request.args['name']
+    data = {'id': _id, 'name': name}
+    return jsonify(data)
+
+
+@app.route('/api/post', methods=['POST'])
+def post():
+    _id = request.form['id']
+    name = request.form['name']
+    data = {'id': _id, 'name': name}
+    return jsonify(data)
+
+
+@app.route('/api/gp', methods=['GET', 'POST'])
+def gp():
+    _id = request.values['id']
+    name = request.values['name']
+    data = {'id': _id, 'name': name}
+    resp = make_response(jsonify(data), 200)
+    resp.headers['X-My-Header'] = 'my value'
+    return resp
 
 
 if __name__ == '__main__':
