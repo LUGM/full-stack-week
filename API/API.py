@@ -1,3 +1,6 @@
+import hashlib
+import random
+
 from flask import Flask, jsonify
 from flask import make_response
 from flask import render_template
@@ -64,6 +67,16 @@ def gp():
     resp = make_response(jsonify(data), 200)
     resp.headers['X-My-Header'] = 'my value'
     return resp
+
+
+@app.route('/api/gpl', methods=['GET', 'POST'])
+def gpl():
+    output = []
+    number = int(request.values['number'])
+    for i in range(0, number):
+        data = {'id': i + 1, 'hash': hashlib.md5(str(i)).hexdigest()}
+        output.append(data)
+    return make_response(jsonify(output), 200)
 
 
 if __name__ == '__main__':
